@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
     res.send('This is my API running...')
 })
 
-app.get('/about', (req, res) => {
+app.get('/about/:id', (req, res) => {
     let id = req.params.id;
     res.send('This is my about route' + id )
 })
