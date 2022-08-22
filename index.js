@@ -11,7 +11,8 @@ app.get('/', (req, res) => {
 })
 
 app.get('/about', (req, res) => {
-    res.send('This is my about route')
+    let id = req.params.id;
+    res.send('This is my about route' + id )
 })
 
 module.exports = app
