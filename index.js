@@ -1,8 +1,7 @@
 const express = require('express')
 const app = express()
 const PORT = 4000
-const bp = require('body-parser')
-
+const BP = require('body-parser')
 app.use(bp.json())
 app.use(bp.urlencoded({ extended: true }))
 
@@ -20,7 +19,7 @@ app.get('/get/:name', (req, res) => {
     res.send('This is my Name  : ' + name )
 })
 
-//{  "Name": "ituchkub",    "Mail": "ituchkub@gmail.com" }
+//{  "name": "ituchkub",    "Mail": "ituchkub@gmail.com" }
 app.post('/post', (req, res) => {
 
    
