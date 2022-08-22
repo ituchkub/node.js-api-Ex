@@ -5,7 +5,7 @@ const PORT = 4000
 app.configure(function(){
     app.use(express.bodyParser());
   });
-  
+
 app.listen(PORT, () => {
     console.log(`API Listening on PORT ${PORT}`)
 })
@@ -21,9 +21,9 @@ app.get('/get/:name', (req, res) => {
 
 app.post('/post', (req, res) => {
 
-    console.log(req.body);
+   // console.log(req.body);
    // let name = req.body.name;
-   // res.send('This is my Name ' + name )
+    res.send(req.body)
 })
 
 module.exports = app
