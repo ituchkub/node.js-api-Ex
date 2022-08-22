@@ -10,9 +10,14 @@ app.get('/', (req, res) => {
     res.send('This is my API running...')
 })
 
-app.get('/about/:id', (req, res) => {
-    let id = req.params.id;
-    res.send('This is my about route' + id )
+app.get('/get/:name', (req, res) => {
+    let name = req.params.name;
+    res.send('This is my E-mail : ' + name )
+})
+
+app.post('/post/', (req, res) => {
+    let name = req.body.name;
+    res.send('This is my Name ' + name )
 })
 
 module.exports = app
