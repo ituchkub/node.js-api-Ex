@@ -1,10 +1,10 @@
 const express = require('express')
 const app = express()
 const PORT = 4000
+const bp = require('body-parser')
 
-app.configure(function(){
-    app.use(express.bodyParser());
-  });
+app.use(bp.json())
+app.use(bp.urlencoded({ extended: true }))
 
 app.listen(PORT, () => {
     console.log(`API Listening on PORT ${PORT}`)
