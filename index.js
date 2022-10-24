@@ -16,15 +16,32 @@ app.get('/', (req, res) => {
 //https://node-api-vercel-ecru.vercel.app/get/ITuCHKub
 app.get('/get/:name', (req, res) => {
     let name = req.params.name;
-    res.send('This is my Name  : ' + name )
+    res.send('This is my Name  : ' + name)
 })
 
 //{  "name": "ituchkub",    "Mail": "ituchkub@gmail.com" }
-app.post('/post', (req, res) => {   
-   let Name = req.body.name;  
-   let mail = req.body.mail;
-   res.send('This is my Name  : ' + Name+' And My E-Mail : '+mail )
-   //res.send(req.body)    {"name":"Kantathus","mail":"ituchkub@gmail.com"}
+app.post('/post', (req, res) => {
+    let Name = req.body.name;
+    let mail = req.body.mail;
+    res.send('This is my Name  : ' + Name + ' And My E-Mail : ' + mail)
+    //res.send(req.body)    {"name":"Kantathus","mail":"ituchkub@gmail.com"}
 })
 
+app.post('/Authorization', (req, res) => {
+ 
+    var request = require('request');
+    request.post({
+        headers: { 'content-type': 'application/x-www-form-urlencoded' },
+        url: 'https://third-party-authentication-sit.sritrangfriends.com/api/restful/v1/third-party/authentication',
+        form: {
+            clientID: "6cfbcf8f-45ed-4a14-b37f-7438eedbdd36",
+            clientSecret: "MTE3MmNhNzctODA5NS00MTg4LWE0YTYtNDNlNjg4YzU1YTMy",
+            grantType: "client_credentials"
+        }
+    }, function (error, response, body) {
+        console.log(body);
+        res.send(body);
+    });
+
+})
 module.exports = app
