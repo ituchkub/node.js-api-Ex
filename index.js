@@ -28,7 +28,7 @@ app.post('/post', (req, res) => {
 })
 
 app.post('/Authorization', (req, res) => {
- 
+
     var request = require('request');
     request.post({
         headers: { 'content-type': 'application/x-www-form-urlencoded' },
@@ -38,6 +38,86 @@ app.post('/Authorization', (req, res) => {
             clientSecret: "MTE3MmNhNzctODA5NS00MTg4LWE0YTYtNDNlNjg4YzU1YTMy",
             grantType: "client_credentials"
         }
+    }, function (error, response, body) {
+        console.log(body);
+        res.send(body);
+    });
+
+})
+
+app.post('/checkedin', (req, res) => {
+
+    var JDataA = {      
+            "activity": "1",
+            "contractNo": "221234567",
+            "subContractNo": "22123456701",
+            "vPassDocumentNo": "SMR-22-1060-000001",
+            "vPassDateIn": "2022-12-01",
+            "vPassTimeIn": "07:29",
+            "receivePlantCode": "1030"       
+    };
+    var request = require('request');
+    request.post({
+        headers: {
+            'Authorization': 'Bearer eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJjbGllbnRJRCI6IjZjZmJjZjhmLTQ1ZWQtNGExNC1iMzdmLTc0MzhlZWRiZGQzNiIsImNyZWF0ZWRBdCI6IjIwMjItMTAtMjVUMDU6NDk6NDQuMjIzODc2NDIxWiIsImV4cGlyZXNJbiI6IjIwMjItMTAtMjVUMTM6NDk6NDQuMjIzODc1NjI4WiIsImlzcyI6ImNvbS5zcml0YW5nZnJpZW5kbmV4dCJ9.FoaYU4_U2JI_tLS2LN8rC11tnZfSkHurOdfoEDqrQAr4r2RqwZwxMIIKAhEss6VHuSYvaWfHK5c9JJcaTUVBDQ'
+        },
+        url: 'https://rubber-purchasing-integration-sit.sritrangfriends.com/api/restful/v1/rubber-trading/delivery/checked-in',
+        body: JDataA,
+        json: true
+    }, function (error, response, body) {
+        console.log(body);
+        res.send(body);
+    });
+
+})
+
+app.post('/receiveQualityResult', (req, res) => {
+
+    var JDataA = {
+        "activity": "1",
+        "contractNo": "221234567",
+        "subContractNo": "22123456701",
+        "materialCode": "FLTX002FSC100",
+        "sclaeBillNo": "2205250032",
+        "scaleNo": "2201016316",
+        "dateTruckIn": "2022-12-01",
+        "timeTruckIn": "07:00:01",
+        "dateTruckOut": "2022-12-01",
+        "timeTruckOut": "07:00:01",
+        "dateDrainedWaterIn": "2022-12-01",
+        "timeDrainedWaterIn": "08:00:01",
+        "dateDrainedWaterOut": "2022-12-01",
+        "timeDrainedWaterOut": "16:20:21",
+        "vPassDateCheckOut": "2022-12-01",
+        "vPassTimeCheckOut": "16:02",
+        "weightIn": 4350,
+        "weightOut": 2050,
+        "goodsWeight": 2300,
+        "createdBy": "John Doe",
+        "qcTime": "15:40",
+        "rejectType": "",
+        "testResult": "A",
+        "vfaResult": 0.070,
+        "drcResult": 62.2,
+        "nh3Result": 0.25,
+        "formaldehydeResult": "0",
+        "sulfateResult": "0",
+        "contaminationBillURL": "",
+        "complaintNo": "N-1030-2022000001",
+        "contaminateValue": 2500,
+        "contaminateDiscount": 500,
+        "contaminateOutstanding": 2000,
+        "qualityCheck": "0",
+        "drcLabResult": 62.50
+    };
+    var request = require('request');
+    request.post({
+        headers: {
+            'Authorization': 'Bearer eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJjbGllbnRJRCI6IjZjZmJjZjhmLTQ1ZWQtNGExNC1iMzdmLTc0MzhlZWRiZGQzNiIsImNyZWF0ZWRBdCI6IjIwMjItMTAtMjVUMDU6NDk6NDQuMjIzODc2NDIxWiIsImV4cGlyZXNJbiI6IjIwMjItMTAtMjVUMTM6NDk6NDQuMjIzODc1NjI4WiIsImlzcyI6ImNvbS5zcml0YW5nZnJpZW5kbmV4dCJ9.FoaYU4_U2JI_tLS2LN8rC11tnZfSkHurOdfoEDqrQAr4r2RqwZwxMIIKAhEss6VHuSYvaWfHK5c9JJcaTUVBDQ'
+        },
+        url: 'https://rubber-purchasing-integration-sit.sritrangfriends.com/api/restful/v1/rubber-trading/delivery/quality-result',
+        body: JDataA,
+        json: true
     }, function (error, response, body) {
         console.log(body);
         res.send(body);
