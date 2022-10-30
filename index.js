@@ -27,47 +27,37 @@ app.post('/post', (req, res) => {
     //res.send(req.body)    {"name":"Kantathus","mail":"ituchkub@gmail.com"}
 })
 
-app.post('/Authorization', (req, res) => {
-
-    var request = require('request');
-    request.post({
-        headers: { 'content-type': 'application/x-www-form-urlencoded' },
-        url: 'https://third-party-authentication-sit.sritrangfriends.com/api/restful/v1/third-party/authentication',
-        form: {
-            clientID: "6cfbcf8f-45ed-4a14-b37f-7438eedbdd36",
-            clientSecret: "MTE3MmNhNzctODA5NS00MTg4LWE0YTYtNDNlNjg4YzU1YTMy",
-            grantType: "client_credentials"
-        }
-    }, function (error, response, body) {
-        console.log(body);
-        res.send(body);
+app.post('/Author', async (req, res) => {
+    const axios = require('axios');
+    let reqe = await axios.post('https://third-party-authentication-sit.sritrangfriends.com/api/restful/v1/third-party/authentication', {
+        clientID: "6cfbcf8f-45ed-4a14-b37f-7438eedbdd36",
+        clientSecret: "MTE3MmNhNzctODA5NS00MTg4LWE0YTYtNDNlNjg4YzU1YTMy",
+        grantType: "client_credentials"
     });
-
+    let ress = {
+        status: true,
+        data: reqe.data
+    }
 })
 
-app.post('/checkedin', (req, res) => {
+app.post('/axios', async (req, res) => {
 
-    var JDataA = {      
-            "activity": "1",
-            "contractNo": "221234567",
-            "subContractNo": "22123456701",
-            "vPassDocumentNo": "SMR-22-1060-000001",
-            "vPassDateIn": "2022-12-01",
-            "vPassTimeIn": "07:29",
-            "receivePlantCode": "1030"       
+    var JDataA = {
+        "activity": "1",
+        "contractNo": "221234567",
+        "subContractNo": "22123456701",
+        "vPassDocumentNo": "SMR-22-1060-000001",
+        "vPassDateIn": "2022-12-01",
+        "vPassTimeIn": "07:29",
+        "receivePlantCode": "1030"
     };
-    var request = require('request');
-    request.post({
+    let reqe = await axios.post('https://rubber-purchasing-integration-sit.sritrangfriends.com/api/restful/v1/rubber-trading/delivery/checked-in', JDataA, {
         headers: {
-            'Authorization': 'Bearer eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJjbGllbnRJRCI6IjZjZmJjZjhmLTQ1ZWQtNGExNC1iMzdmLTc0MzhlZWRiZGQzNiIsImNyZWF0ZWRBdCI6IjIwMjItMTAtMjVUMDU6NDk6NDQuMjIzODc2NDIxWiIsImV4cGlyZXNJbiI6IjIwMjItMTAtMjVUMTM6NDk6NDQuMjIzODc1NjI4WiIsImlzcyI6ImNvbS5zcml0YW5nZnJpZW5kbmV4dCJ9.FoaYU4_U2JI_tLS2LN8rC11tnZfSkHurOdfoEDqrQAr4r2RqwZwxMIIKAhEss6VHuSYvaWfHK5c9JJcaTUVBDQ'
-        },
-        url: 'https://rubber-purchasing-integration-sit.sritrangfriends.com/api/restful/v1/rubber-trading/delivery/checked-in',
-        body: JDataA,
-        json: true
-    }, function (error, response, body) {
-        console.log(body);
-        res.send(body);
+            'Authorization': 'Bearer Bearer eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJjbGllbnRJRCI6IjZjZmJjZjhmLTQ1ZWQtNGExNC1iMzdmLTc0MzhlZWRiZGQzNiIsImNyZWF0ZWRBdCI6IjIwMjItMTAtMjVUMDU6NDk6NDQuMjIzODc2NDIxWiIsImV4cGlyZXNJbiI6IjIwMjItMTAtMjVUMTM6NDk6NDQuMjIzODc1NjI4WiIsImlzcyI6ImNvbS5zcml0YW5nZnJpZW5kbmV4dCJ9.FoaYU4_U2JI_tLS2LN8rC11tnZfSkHurOdfoEDqrQAr4r2RqwZwxMIIKAhEss6VHuSYvaWfHK5c9JJcaTUVBDQ'
+        }
     });
+    let data = reqe.data;
+    console.log(data)
 
 })
 
